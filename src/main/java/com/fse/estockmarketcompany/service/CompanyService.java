@@ -13,4 +13,8 @@ public interface CompanyService {
     CompanyAll info(int companyCode) throws CommonInternalException;
 
     List<CompanyAll> getAllCompanyInfo();
+
+    void updateCompanyStockDetail(Map<String, Object> mapData);
+
+    Map<String, String> delete(int companyCode) throws CommonInternalException;
 }

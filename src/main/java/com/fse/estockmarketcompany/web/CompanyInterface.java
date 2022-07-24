@@ -3,7 +3,6 @@ package com.fse.estockmarketcompany.web;
 import com.fse.estockmarketcompany.exception.CommonInternalException;
 import com.fse.estockmarketcompany.model.CompanyAll;
 import com.fse.estockmarketcompany.model.request.CompanyRequest;
-import lombok.Getter;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,4 +23,7 @@ public interface CompanyInterface {
 
     @GetMapping("/getall")
     ResponseEntity<List<CompanyAll>> getAllCompanyInfo();
+
+    @DeleteMapping("/delete/{companyCode}")
+    ResponseEntity<Map<String, String>> delete(@PathVariable("companyCode") int companyCode) throws CommonInternalException;
 }

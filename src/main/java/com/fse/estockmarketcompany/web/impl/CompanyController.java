@@ -40,4 +40,9 @@ public class CompanyController implements CompanyInterface {
     public ResponseEntity<List<CompanyAll>> getAllCompanyInfo() {
         return new ResponseEntity<>(service.getAllCompanyInfo(), HttpStatus.OK);
     }
+
+    @Override
+    public ResponseEntity<Map<String, String>> delete(int companyCode) throws CommonInternalException {
+        return new ResponseEntity<>(service.delete(companyCode), HttpStatus.NO_CONTENT);
+    }
 }

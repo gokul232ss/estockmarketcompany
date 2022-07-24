@@ -18,6 +18,8 @@ public final class CommonConstant {
     public final static SimpleDateFormat formatter = new SimpleDateFormat("dd-MMM-yyyy hh:mm:ss", Locale.ENGLISH);
     private static final Map<String, String> result = new HashMap<>();
 
+    public final static String ADD_STOCK_QUEUE="fse_add_new_stock";
+
     public static Map<String, String> getSuccessMapResponse() {
         result.put("message", "success");
         return result;
