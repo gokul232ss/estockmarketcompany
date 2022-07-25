@@ -40,7 +40,7 @@ public class CompanyServiceImpl implements CompanyService {
     @Value("${com.fse.exchange}")
     private String fseExchange;
 
-    @Value("${com.fse.stock.routingkey}")
+    @Value("${com.fse.company.routingkey}")
     private String routingKey;
 
     @Override
