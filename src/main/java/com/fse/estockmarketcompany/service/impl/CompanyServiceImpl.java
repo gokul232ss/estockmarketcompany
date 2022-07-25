@@ -10,7 +10,6 @@ import com.fse.estockmarketcompany.model.request.CompanyRequest;
 import com.fse.estockmarketcompany.repository.CompanyAllRepository;
 import com.fse.estockmarketcompany.repository.CompanyRepository;
 import com.fse.estockmarketcompany.service.CompanyService;
-import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
@@ -36,7 +35,7 @@ public class CompanyServiceImpl implements CompanyService {
     private ObjectMapper ob;
 
     @Autowired
-    private RabbitTemplate template;
+    private RabbitMqServiceImpl rabbitMqService;
 
     @Value("${com.fse.exchange}")
     private String fseExchange;
@@ -103,7 +102,7 @@ public class CompanyServiceImpl implements CompanyService {
         repo.findById(companyCode);
         Map<String, String> map = CommonConstant.getSuccessMapResponse();
         map.put("companyCode", String.valueOf(companyCode));
-        template.convertAndSend(fseExchange, routingKey, map);
+        rabbitMqService.publishMessage(fseExchange, routingKey, map);
         return map;
     }
 }
