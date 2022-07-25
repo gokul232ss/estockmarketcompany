@@ -14,5 +14,5 @@ public class Stock {
     private int companyCode;
     private String stockName;
     private double price;
-    private Timestamp stockDateTime;
+    private String stockDateTime;
 }

@@ -17,6 +17,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -88,6 +89,9 @@ public class CompanyServiceImpl implements CompanyService {
             if (company.getStockList() == null) {
                 company.setStockList(new ArrayList<>());
             }
+            stock.setStockDateTime(
+                    CommonConstant.getUIDateFormatIfNotNull(
+                            new Timestamp(Long.parseLong(stock.getStockDateTime()))));
             company.getStockList().add(stock);
             mongoRepo.save(company);
         }
