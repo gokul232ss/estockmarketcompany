@@ -81,15 +81,14 @@ public class CompanyServiceImpl implements CompanyService {
     }
 
     @Override
-    public void updateCompanyStockDetail(Map<String, Object> mapData) {
-        Optional<CompanyAll> data = mongoRepo.findById(
-                Integer.parseInt(mapData.get("companyCode").toString()));
+    public void updateCompanyStockDetail(Stock stock) {
+        Optional<CompanyAll> data = mongoRepo.findById(stock.getCompanyCode());
         if (data.isPresent()) {
             CompanyAll company = data.get();
             if (company.getStockList() == null) {
                 company.setStockList(new ArrayList<>());
             }
-            company.getStockList().add(ob.convertValue(mapData.get("stock"), Stock.class));
+            company.getStockList().add(stock);
             mongoRepo.save(company);
         }
     }

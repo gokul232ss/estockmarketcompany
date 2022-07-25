@@ -2,6 +2,7 @@ package com.fse.estockmarketcompany.service;
 
 import com.fse.estockmarketcompany.exception.CommonInternalException;
 import com.fse.estockmarketcompany.model.CompanyAll;
+import com.fse.estockmarketcompany.model.Stock;
 import com.fse.estockmarketcompany.model.request.CompanyRequest;
 
 import java.util.List;
@@ -14,7 +15,7 @@ public interface CompanyService {
 
     List<CompanyAll> getAllCompanyInfo();
 
-    void updateCompanyStockDetail(Map<String, Object> mapData);
+    void updateCompanyStockDetail(Stock stock);
 
     Map<String, String> delete(int companyCode) throws CommonInternalException;
 }
