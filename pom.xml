@@ -95,6 +95,7 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<finalName>estockmarketcompany_local</finalName>
 	</build>
 
 </project>
