@@ -18,4 +18,6 @@ public interface CompanyService {
     void updateCompanyStockDetail(Stock stock);
 
     Map<String, String> delete(int companyCode) throws CommonInternalException;
+
+    List<Map<String, String>> getAllCompanyForDropDown();
 }

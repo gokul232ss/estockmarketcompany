@@ -26,6 +26,11 @@ public class CompanyController implements CompanyInterface {
     }
 
     @Override
+    public ResponseEntity<List<Map<String, String>>> getAllCompanyForDropDown() {
+        return new ResponseEntity<>(service.getAllCompanyForDropDown(), HttpStatus.OK);
+    }
+
+    @Override
     public ResponseEntity<Map<String, String>> register(CompanyRequest request)
             throws CommonInternalException {
         return new ResponseEntity<>(service.register(request), HttpStatus.CREATED);

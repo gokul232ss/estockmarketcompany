@@ -15,6 +15,9 @@ public interface CompanyInterface {
     @GetMapping("/getping")
     ResponseEntity<String> getping();
 
+    @GetMapping("/getAllCompanyForDropDown")
+    ResponseEntity<List<Map<String, String>>> getAllCompanyForDropDown();
+
     @PostMapping("/register")
     ResponseEntity<Map<String, String>> register(@RequestBody CompanyRequest request) throws CommonInternalException;
 

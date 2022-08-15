@@ -69,13 +69,13 @@ public class CompanyServiceImpl implements CompanyService {
             CompanyAll dataValue = data.get();
             List<Double> priceList = dataValue.getStockList()
                     .stream().map(Stock::getPrice).collect(Collectors.toList());
-            dataValue.setMaxStockPrice(!ObjectUtils.isEmpty(priceList)?
-                    String.valueOf(Collections.max(priceList)):"");
-            dataValue.setMinStockPrice(!ObjectUtils.isEmpty(priceList)?
-                    String.valueOf(Collections.min(priceList)):"");
+            dataValue.setMaxStockPrice(!ObjectUtils.isEmpty(priceList) ?
+                    String.valueOf(Collections.max(priceList)) : "");
+            dataValue.setMinStockPrice(!ObjectUtils.isEmpty(priceList) ?
+                    String.valueOf(Collections.min(priceList)) : "");
             Collections.sort(priceList);
-            dataValue.setMaxStockPrice(!ObjectUtils.isEmpty(priceList)?
-                    String.valueOf(priceList.get(priceList.size()/2)):"");
+            dataValue.setMaxStockPrice(!ObjectUtils.isEmpty(priceList) ?
+                    String.valueOf(priceList.get(priceList.size() / 2)) : "");
             return dataValue;
         } else {
             throw new CommonInternalException(
@@ -112,5 +112,15 @@ public class CompanyServiceImpl implements CompanyService {
         map.put("companyCode", String.valueOf(companyCode));
         rabbitMqService.publishMessage(fseExchange, routingKey, map);
         return map;
+    }
+
+    @Override
+    public List<Map<String, String>> getAllCompanyForDropDown() {
+        return repo.findAll().stream().map(d -> {
+            Map<String, String> map = new HashMap<>();
+            map.put("companyCode", String.valueOf(d.getCompanyCode()));
+            map.put("companyName", d.getCompanyName());
+            return map;
+        }).collect(Collectors.toList());
     }
 }
