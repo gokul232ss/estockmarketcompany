@@ -17,10 +17,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class CompanyServiceImpl implements CompanyService {
@@ -68,7 +66,17 @@ public class CompanyServiceImpl implements CompanyService {
     public CompanyAll info(int companyCode) throws CommonInternalException {
         Optional<CompanyAll> data = mongoRepo.findById(companyCode);
         if (data.isPresent()) {
-            return data.get();
+            CompanyAll dataValue = data.get();
+            List<Double> priceList = dataValue.getStockList()
+                    .stream().map(Stock::getPrice).collect(Collectors.toList());
+            dataValue.setMaxStockPrice(!ObjectUtils.isEmpty(priceList)?
+                    String.valueOf(Collections.max(priceList)):"");
+            dataValue.setMinStockPrice(!ObjectUtils.isEmpty(priceList)?
+                    String.valueOf(Collections.min(priceList)):"");
+            Collections.sort(priceList);
+            dataValue.setMaxStockPrice(!ObjectUtils.isEmpty(priceList)?
+                    String.valueOf(priceList.get(priceList.size()/2)):"");
+            return dataValue;
         } else {
             throw new CommonInternalException(
                     "Company details not found", HttpStatus.BAD_REQUEST);
