@@ -46,7 +46,7 @@ public class CompanyServiceImpl implements CompanyService {
         if (!ObjectUtils.isEmpty(request.getCompanyCEO())
                 && !ObjectUtils.isEmpty(request.getCompanyName())
                 && !ObjectUtils.isEmpty(request.getCompanyTurnOver())) {
-            if (request.getCompanyTurnOver() >= 100000000) {
+            if (Double.parseDouble(request.getCompanyTurnOver()) >= 100000000) {
                 Company com = repo.save(new Company(request));
                 mongoRepo.save(new CompanyAll(com, null));
                 Map<String, String> mp = CommonConstant.getSuccessMapResponse();
@@ -67,15 +67,17 @@ public class CompanyServiceImpl implements CompanyService {
         Optional<CompanyAll> data = mongoRepo.findById(companyCode);
         if (data.isPresent()) {
             CompanyAll dataValue = data.get();
-            List<Double> priceList = dataValue.getStockList()
-                    .stream().map(Stock::getPrice).collect(Collectors.toList());
-            dataValue.setMaxStockPrice(!ObjectUtils.isEmpty(priceList) ?
-                    String.valueOf(Collections.max(priceList)) : "");
-            dataValue.setMinStockPrice(!ObjectUtils.isEmpty(priceList) ?
-                    String.valueOf(Collections.min(priceList)) : "");
-            Collections.sort(priceList);
-            dataValue.setMaxStockPrice(!ObjectUtils.isEmpty(priceList) ?
-                    String.valueOf(priceList.get(priceList.size() / 2)) : "");
+            if (!ObjectUtils.isEmpty(dataValue.getStockList())) {
+                List<Double> priceList = dataValue.getStockList()
+                        .stream().map(Stock::getPrice).collect(Collectors.toList());
+                dataValue.setMaxStockPrice(!ObjectUtils.isEmpty(priceList) ?
+                        String.valueOf(Collections.max(priceList)) : "");
+                dataValue.setMinStockPrice(!ObjectUtils.isEmpty(priceList) ?
+                        String.valueOf(Collections.min(priceList)) : "");
+                Collections.sort(priceList);
+                dataValue.setMaxStockPrice(!ObjectUtils.isEmpty(priceList) ?
+                        String.valueOf(priceList.get(priceList.size() / 2)) : "");
+            }
             return dataValue;
         } else {
             throw new CommonInternalException(

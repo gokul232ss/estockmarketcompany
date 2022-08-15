@@ -11,5 +11,5 @@ public class CompanyRequest {
     private Integer companyCode;
     private String companyName;
     private String companyCEO;
-    private double companyTurnOver;
+    private String companyTurnOver;
 }

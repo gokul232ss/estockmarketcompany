@@ -75,7 +75,7 @@ class EstockmarketcompanyApplicationTests {
         CompanyRequest company = new CompanyRequest();
         company.setCompanyCEO("newCEO");
         company.setCompanyName("newName");
-        company.setCompanyTurnOver(100000000);
+        company.setCompanyTurnOver("100000000");
         String requestJson = ob.writeValueAsString(com);
         this.mockMvc.perform(MockMvcRequestBuilders.post("/company/register")
                 .accept(MediaType.APPLICATION_JSON)
@@ -90,7 +90,7 @@ class EstockmarketcompanyApplicationTests {
     public void testA3CreateStockBadRequest() throws Exception {
         CompanyRequest com = new CompanyRequest();
         com.setCompanyName("newName");
-        com.setCompanyTurnOver(100000000);
+        com.setCompanyTurnOver("100000000");
         String requestJson = ob.writeValueAsString(com);
         this.mockMvc.perform(MockMvcRequestBuilders.post("/company/register")
                 .accept(MediaType.APPLICATION_JSON)
@@ -106,7 +106,7 @@ class EstockmarketcompanyApplicationTests {
         CompanyRequest com = new CompanyRequest();
         com.setCompanyCEO("newCEO");
         com.setCompanyName("newName");
-        com.setCompanyTurnOver(100000);
+        com.setCompanyTurnOver("100000");
         String requestJson = ob.writeValueAsString(com);
         this.mockMvc.perform(MockMvcRequestBuilders.post("/company/register")
                 .accept(MediaType.APPLICATION_JSON)

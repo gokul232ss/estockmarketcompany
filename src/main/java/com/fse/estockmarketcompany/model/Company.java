@@ -24,6 +24,6 @@ public class Company {
         }
         this.companyCEO = request.getCompanyCEO();
         this.companyName = request.getCompanyName();
-        this.companyTurnOver = request.getCompanyTurnOver();
+        this.companyTurnOver = Double.parseDouble(request.getCompanyTurnOver());
     }
 }
