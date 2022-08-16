@@ -75,7 +75,7 @@ public class CompanyServiceImpl implements CompanyService {
                 dataValue.setMinStockPrice(!ObjectUtils.isEmpty(priceList) ?
                         String.valueOf(Collections.min(priceList)) : "");
                 Collections.sort(priceList);
-                dataValue.setMaxStockPrice(!ObjectUtils.isEmpty(priceList) ?
+                dataValue.setAvgStockPrice(!ObjectUtils.isEmpty(priceList) ?
                         String.valueOf(priceList.get(priceList.size() / 2)) : "");
             }
             return dataValue;
